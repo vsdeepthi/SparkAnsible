@@ -4,7 +4,7 @@
    - vars/var_basic.yml
    - vars/var_master.yml
   vars:
-     ansible_python_interpreter: /auto/csap/python3/bin/python
+     ansible_python_interpreter: {PATH_TO_PYTHON_EXE}
      install_spark: true
      config_spark: true
   roles:
