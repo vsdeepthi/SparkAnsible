@@ -1,0 +1,12 @@
+---
+- name: Copy Spark slaves
+  template: src=slaves dest={{ spark_config_path }} mode=644 owner={{ user }} group = {{ group }}
+
+- name: Copy Spark Env file
+  template: src=spark-env.sh dest={{ spark_config_path }} mode=644 owner={{ user }} group = {{ group }}
+
+#- name: Copy Hadoop Env Script
+#  template: src=hadoop_env.sh dest=/etc/profile.d/ mode=755
+#
+#- name: Set Hadoop Env
+#  shell: source /etc/profile.d/hadoop_env.sh
