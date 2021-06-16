@@ -15,17 +15,8 @@
 ## Install Spark
 
 1. Download Spark to any path
-2. Update the {{ download_path }} and {{ hadoop_version }} in vars/var_basic.yml
-```
-download_path: "{DOWNLAOD_PATH}" # your local path 
-hadoop_version: "3.0.0" # your hadoop version
-hadoop_path: "{HADOOP_PATH}" # default in user "hadoop" home
-hadoop_config_path: "/home/hadoop/hadoop-{{hadoop_version}}/etc/hadoop"
-hadoop_tmp: "/home/hadoop/tmp"
-hadoop_dfs_name: "/home/hadoop/dfs/name"
-hadoop_dfs_data: "/home/hadoop/dfs/data"
+2. Update the {{ download_path }}  in vars/var_basic.yml
 
-```
 
 ### Install Master
 
@@ -40,12 +31,9 @@ ansible-playbook -i hosts/host master.yml
 
 run shell like:
 ```
-master_ip:  your hadoop master ip
-master_hostname: your hadoop master hostname
 
-above two variables must be same like your real hadoop master
 
-ansible-playbook -i hosts/host workers.yml -e "master_ip=172.16.251.70 master_hostname=hadoop-master"
+ansible-playbook -i hosts/host workers.yml 
 
 ```
 
