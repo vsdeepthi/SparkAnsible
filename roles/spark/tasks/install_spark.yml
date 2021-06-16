@@ -1,2 +1,2 @@
-- name: Unzip Hadoop
+- name: Unzip Spark
   shell: "tar -xvf {{ download_path }}/spark-{{spark_version}}-bin-hadoop{{hadoop_version}}.tgz -C {{ spark_path }} --strip-components=1"
