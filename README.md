@@ -1,38 +1,51 @@
-Role Name
-=========
+# Spark-ansible
+- Installs Spark cluster with ansible on RHEL 7
 
-A brief description of the role goes here.
+## Before Install
+- Download spark installable and place it in a folder 
+- Ensure a passwordless SSH is setup between all the hosts in the cluster for the {GENERIC_USER}
+- Ensure {GENERIC_USER} has permissions to create folders under the path mentioned by varibale {HADOOP_PATH}
+- Modify hosts/host with host names of the cluster
+- Update vars/var_basic.yml for {DOWNLAOD_PATH}, {PATH_TO_PYTHON_EXE}, {HADOOP_PATH}
+- Update {PATH_TO_PYTHON_EXE} in ansible.cfg, roles/hadoop/tasks/main.yml
+- Update {MASTER_IP}, {MASTER_HOSTNAME} in vars/var_master.yml, vars/var_workers.yml
+- Update {GENERIC_USER}, {GENERIC_USER_GROUP} in vars/user.yml
+- Update {PATH_TO_HOSTS} in ansible.cfg to point to the directory that has hosts inventory file
 
-Requirements
-------------
+## Install Spark
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+1. Download Spark to any path
+2. Update the {{ download_path }} and {{ hadoop_version }} in vars/var_basic.yml
+```
+download_path: "{DOWNLAOD_PATH}" # your local path 
+hadoop_version: "3.0.0" # your hadoop version
+hadoop_path: "{HADOOP_PATH}" # default in user "hadoop" home
+hadoop_config_path: "/home/hadoop/hadoop-{{hadoop_version}}/etc/hadoop"
+hadoop_tmp: "/home/hadoop/tmp"
+hadoop_dfs_name: "/home/hadoop/dfs/name"
+hadoop_dfs_data: "/home/hadoop/dfs/data"
 
-Role Variables
---------------
+```
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### Install Master
 
-Dependencies
-------------
+run shell like
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+```
+ansible-playbook -i hosts/host master.yml
+```
 
-Example Playbook
-----------------
+### Install Workers
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+run shell like:
+```
+master_ip:  your hadoop master ip
+master_hostname: your hadoop master hostname
 
-License
--------
+above two variables must be same like your real hadoop master
 
-BSD
+ansible-playbook -i hosts/host workers.yml -e "master_ip=172.16.251.70 master_hostname=hadoop-master"
 
-Author Information
-------------------
+```
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
