@@ -4,21 +4,21 @@ jvm_home: "/usr/lib/jvm"
 java_packages:
  - "java-1.8.0-openjdk"
  - "java-1.8.0-openjdk-devel"
-ansible_python_interpreter: "/auto/csap/python3/bin/python"
+ansible_python_interpreter: {PATH_TO_PYTHON_EXE}
 
 
 # hadoop basic vars
-download_path: "//auto/csap/downloads/kube"
+download_path: {DOWNLAOD_PATH}
 hadoop_version: "3.2"
 spark_version: "3.1.1"
-spark_path: "/data/spark"
+spark_path: {SPARK_HOME}
 
 
 spark_create_path:
   - "{{ spark_path }}"
 
 # hadoop configration 
-spark_config_path: "/data/spark/conf"
+spark_config_path: "{SPARK_HOME}/conf"
 
 hdfs_port: 9000
 core_site_properties:
