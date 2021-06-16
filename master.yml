@@ -1,0 +1,11 @@
+- hosts: master 
+  vars_files:
+   - vars/user.yml
+   - vars/var_basic.yml
+   - vars/var_master.yml
+  vars:
+     ansible_python_interpreter: /auto/csap/python3/bin/python
+     install_spark: true
+     config_spark: true
+  roles:
+    - spark

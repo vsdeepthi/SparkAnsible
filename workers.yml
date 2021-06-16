@@ -1,0 +1,14 @@
+- hosts: workers 
+  gather_facts: no
+  remote_user: csapadm
+  vars_files:
+   - vars/user.yml
+   - vars/var_basic.yml
+   - vars/var_workers.yml
+  vars:
+    install_spark: true
+    config_spark: true
+  roles:
+    - spark
+
+
